@@ -75,7 +75,7 @@ class _AuthScreenState extends State<AuthScreen> {
         // to public
         // using (bucket_id = 'user_images');
 
-        final String fullPath = await _supabaseStorage
+        await _supabaseStorage
             .from('user_images')
             .upload(
               '${userCredentials.user!.uid}.jpg',
@@ -87,7 +87,7 @@ class _AuthScreenState extends State<AuthScreen> {
             );
         final String imageUrl = _supabaseStorage
             .from('user_images')
-            .getPublicUrl(fullPath);
+            .getPublicUrl('${userCredentials.user!.uid}.jpg');
 
         await FirebaseFirestore.instance
             .collection('users')
